@@ -130,14 +130,22 @@ const Invoice = () => {
           <img src="${logo}" alt="Company Logo" style="width: 80px; height: auto;" />
         </div>
     
-        <h3 style="text-align: center; margin: 0; font-size: 16px; text-transform: uppercase;">Testing</h3>
-        <p style="text-align: center; margin: 5px 0; font-size: 12px;">Testing Work</p>
-        <p style="text-align: center; margin: 0; font-size: 10px;">Phone: +92 333 3395115</p>
-        <p style="text-align: center; margin: 5px 0; font-size: 12px;">Email: mafnankhadim74@gmail.com</p>
-    
+        <h3 style="text-align: center; margin: 0; font-size: 16px; text-transform: uppercase;">${
+          storeDetails.storeName
+        }</h3>
+        <p style="text-align: center; margin: 5px 0; font-size: 12px;">Phone: ${
+          storeDetails.contactNo
+        }</p>
+        <p style="text-align: center; margin: 0; font-size: 10px;">Email: ${
+          storeDetails.email
+        }</p>
+        <p style="text-align: center; margin: 5px 0; font-size: 12px;">Address: ${
+          storeDetails.address
+        }</p>
+
         <hr style="border: 1px dashed #000; margin: 10px 0;">
-        <p style="margin: 0; font-size: 12px;"><strong>ID:</strong> ${
-          invoice._id
+        <p style="margin: 0; font-size: 12px;"><strong>Invoice No:</strong> ${
+          invoice.invoiceNo
         }</p>
         <p style="margin: 0; font-size: 12px;"><strong>Customer Name:</strong> ${
           invoice.customerName
@@ -149,10 +157,9 @@ const Invoice = () => {
           invoice.createdAt
         )}</p>
         <p style="margin: 0; font-size: 12px;"><strong>Time:</strong> ${formatTime()}</p>
-        <p style="margin: 0; font-size: 12px;"><strong>Invoice No:</strong> ${
-          invoice.invoiceNo
+        <p style="margin: 0; font-size: 12px;"><strong> Billed By:</strong> ${
+          invoice.billedBy
         }</p>
-    
         <hr style="border: 1px dashed #000; margin: 10px 0;">
         <table style="width: 100%; font-size: 12px; border-collapse: collapse;">
           <thead>

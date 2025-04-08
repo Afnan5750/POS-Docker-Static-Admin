@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import "../Styles/InvoiceReport.css";
 import axios from "axios";
-import { FaEye, FaPrint, FaDownload } from "react-icons/fa";
+import { FaEye, FaDownload } from "react-icons/fa";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 
@@ -137,9 +137,6 @@ const InvoiceReport = () => {
             }}
           >
             <FaEye />
-          </button>
-          <button className="print-btn">
-            <FaPrint />
           </button>
         </div>
       ),
