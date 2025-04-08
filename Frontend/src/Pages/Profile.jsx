@@ -10,6 +10,9 @@ const Profile = () => {
     oldPassword: "",
     newPassword: "",
     confirmPassword: "",
+    email: "",
+    contactNo: "",
+    address: "",
   });
 
   const [storeName, setStoreName] = useState("Profile");
@@ -57,7 +60,8 @@ const Profile = () => {
         );
 
         if (response.data.length > 0) {
-          const { storeName, logo } = response.data[0];
+          const { storeName, logo, email, contactNo, address } =
+            response.data[0];
 
           if (storeName) {
             setStoreName(storeName);
@@ -66,6 +70,24 @@ const Profile = () => {
 
           if (logo) setLogo(`http://localhost:5000${logo}`);
           else console.warn("Logo not found in API response.");
+
+          if (email)
+            setUserDetails((prevDetails) => ({
+              ...prevDetails,
+              email: email,
+            }));
+
+          if (contactNo)
+            setUserDetails((prevDetails) => ({
+              ...prevDetails,
+              contactNo: contactNo,
+            }));
+
+          if (address)
+            setUserDetails((prevDetails) => ({
+              ...prevDetails,
+              address: address,
+            }));
         }
       } catch (error) {
         console.error("Error fetching store details:", error);
@@ -114,8 +136,13 @@ const Profile = () => {
     try {
       const formData = new FormData();
       formData.append("storeName", editedStoreName);
-      formData.append("currentPassword", userDetails.oldPassword); // Updated field name
-      formData.append("username", userDetails.username); // Ensure username is sent
+      formData.append("currentPassword", userDetails.oldPassword);
+      formData.append("username", userDetails.username);
+
+      // Add new fields
+      formData.append("email", userDetails.email || "");
+      formData.append("contactNo", userDetails.contactNo || "");
+      formData.append("address", userDetails.address || "");
 
       // Append image if a new one is selected
       if (selectedImage) {
@@ -154,7 +181,7 @@ const Profile = () => {
       setEditing(false);
       clearMessages();
     } catch (error) {
-      setError(error.response?.data?.error || "Error updating details."); // Fixed error message handling
+      setError(error.response?.data?.error || "Error updating details.");
       clearMessages();
     }
   };
@@ -316,9 +343,45 @@ const Profile = () => {
               <input
                 type="text"
                 name="storeName"
-                value={editedStoreName} // Use editedStoreName here instead of storeName
+                value={editedStoreName}
                 className="profile-input"
                 onChange={handleChange}
+              />
+            </div>
+
+            <div className="profile-input-group">
+              <label className="profile-label">Email</label>
+              <input
+                type="email"
+                name="email"
+                value={userDetails.email}
+                className="profile-input"
+                onChange={handleChange}
+                placeholder="Enter your email"
+              />
+            </div>
+
+            <div className="profile-input-group">
+              <label className="profile-label">Contact No</label>
+              <input
+                type="text"
+                name="contactNo"
+                value={userDetails.contactNo}
+                className="profile-input"
+                onChange={handleChange}
+                placeholder="Enter your contact number"
+              />
+            </div>
+
+            <div className="profile-input-group">
+              <label className="profile-label">Address</label>
+              <input
+                type="text"
+                name="address"
+                value={userDetails.address}
+                className="profile-input"
+                onChange={handleChange}
+                placeholder="Enter your address"
               />
             </div>
 
